@@ -115,7 +115,7 @@
                     Celebrando seus 60 anos <span class="destaque">em uma jornada pela a evolução da pecuária,</span> Mauricio Cabo Verde convida você <span class="destaque">para fazer parte desse novo movimento.</span>
                 </div>
             </div>
-            <div class="col-12 col-lg-6 pl-0 mt-4 d-none d-lg-block">
+            <div class="col-12 col-lg-6 pr-0 mt-4 d-none d-lg-block">
                 <img src="imagens/vacas_costas_min.png" style="margin-top: -10%; width: 100%;" alt="Vacas de Costas">
             </div>
         </div>
@@ -139,8 +139,10 @@
     </div>
     <div class="container-fluid" id="container-footer">
         <div class="row justify-content-center align-items-center">
-            <div class="col-12 text-center text-footer">
-                <a class="cpointer" data-toggle="modal" data-target="#modalPrecadastro">Faça seu <span id="text-viva-botao-destaque">pré-cadastro.</span></a>
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <div class="text-footer w800">
+                    <button data-toggle="modal" data-target="#modalPrecadastro">Faça seu <span id="text-viva-botao-destaque">pré-cadastro.</span></button>
+                </div>
             </div>
         </div>
     </div>
@@ -333,6 +335,63 @@
                 $(this).html(event.strftime(template));
             });
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".btn-enviar").click(function () {
+                var interesse = [];
+                var atuacao = [];
+                var racas = [];
+
+                $('input[name=interesse]:checked').each(function () {
+                    interesse.push($(this).val());
+                });
+                $('input[name=atuacao]:checked').each(function () {
+                    atuacao.push($(this).val());
+                });
+                $('input[name=racas]:checked').each(function () {
+                    racas.push($(this).val());
+                });
+
+                if ($("#raca_extra").val().length > 0) {
+                    racas.push($("#raca_extra").val());
+                }
+
+                data = {
+                    nome: $('input[name=nome]').val(),
+                    empresa: $('input[name=empresa]').val(),
+                    email: $('input[name=email]').val(),
+                    whatsapp: $('input[name=whatsapp]').val(),
+                    interesse: interesse,
+                    atuacao: atuacao,
+                    racas: racas,
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: '/cadastro.php',
+                    data: data,
+                    beforeSend: function () {
+                        $("#btn-enviar").css("display", "none");
+                        $("#ajax-loading").show();
+                    },
+                    success: function (ret) {
+                        if (ret == "Sucesso") {
+                            console.log("sucesso")
+                        } else {
+                            console.log(ret);
+                        }
+                        $("#row-enviar").slideUp(200, function () {
+                            $("#row-sucesso").slideDown(200);
+                        });
+                    },
+                    error: function (ret) {
+                    }
+                    // dataType: dataType
+                });
+
+            });
+        });
     </script>
 </body>
 

@@ -373,13 +373,19 @@ a, a:hover, a:focus, a:active {
     min-height: 340px;
 }
 
-.text-footer > a{
-    color: white !important;
+.text-footer > button{
+    background-color: #E85212;
+    border: 0px;
+    color: white;
+    border-radius: 43px;
+    width: 100%;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 55px;
+    /* line-height:340px; */
     letter-spacing: 0px;
     color:white;
+    padding: 30px 0;
 }
 
 .text-footer > a > .destaque{
@@ -389,16 +395,13 @@ a, a:hover, a:focus, a:active {
 @media(max-width: 768px){
     #container-footer > .row{
         margin-top: 0px;
-        min-height: 100px;
+        min-height: 150px;
     }
     
-    .text-footer > a{
-        color: white !important;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-        font-size: 25px;
+    .text-footer > button{
+        font-size: 23px;
         letter-spacing: 0px;
-        color:white;
+        padding: 20px 0;
     }    
 }
 
